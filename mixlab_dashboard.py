@@ -1,56 +1,45 @@
 
 import streamlit as st
 import pandas as pd
-import altair as alt
 
 st.set_page_config(page_title="MixLab Dashboard", layout="wide", initial_sidebar_state="expanded")
 
-st.markdown("""<style>
-body { background-color: #111; color: #ddd; }
-h1, h2, h3 { color: #ffa500; }
-.sidebar .sidebar-content { background-color: #222; }
-</style>""", unsafe_allow_html=True)
+st.markdown("# MixLab Dashboard (Dark Mode)")
+st.sidebar.title("Navigation")
+menu = st.sidebar.radio("Go to:", ["Flavor Stash Manager", "Steep Timers", "Synergy Heatmap", "Recipe Diff Tool", "VapeSim AI", "Quick Mix Assistant"])
 
-st.title("MixLab Dashboard")
+# Simulated flavor stash from user's memory
+flavor_stash = [
+    "FA Custard Premium", "INW Custard", "TFA Bavarian Cream", "NicVape Bavarian Cream",
+    "NicVape Vanilla Custard", "CAP French Vanilla", "CAP Sugar Cookie", "INW Biscuit",
+    "TFA Cheesecake (Graham Crust)", "TFA Strawberry Ripe", "CAP Sweet Strawberry",
+    "NicVape Sweet Strawberry", "NicVape Strawberry Ripe", "TFA Vanilla Swirl",
+    "TFA Vanilla Bean Ice Cream", "FW Blueberry", "FA Bilberry", "TFA Blueberry Extra",
+    "FA Marshmallow", "Capella Vanilla Custard v1", "FLV Vanilla Pudding", "FA Cream Fresh",
+    "INW Strawberry Shisha", "CAP New York Cheesecake", "WF Glazed Donut SC"
+]
 
-tabs = st.tabs(["Quick Mix Assistant", "Flavor Stash", "Synergy Heatmap", "Steep Timers", "VapeSim AI", "Recipe Diff Tool"])
+if menu == "Flavor Stash Manager":
+    st.subheader("Your Flavor Stash")
+    df = pd.DataFrame({"Flavor Name": flavor_stash})
+    st.dataframe(df)
 
-with tabs[0]:
-    st.header("Quick Mix Assistant")
-    st.write("Suggest quick recipes and flavor combos.")
-    # Placeholder for assistant logic
+elif menu == "Steep Timers":
+    st.subheader("Steep Timers")
+    st.info("Coming soon: add and track steep timers for each recipe.")
 
-with tabs[1]:
-    st.header("Flavor Stash Manager")
-    st.write("Manage and view your flavor stash.")
-    # Placeholder for flavor stash input/view
+elif menu == "Synergy Heatmap":
+    st.subheader("Flavor Synergy Heatmap")
+    st.info("Coming soon: visualize pairwise flavor synergy scores.")
 
-with tabs[2]:
-    st.header("Flavor Synergy Heatmap")
-    st.write("Visualize high-synergy pairings.")
-    # Placeholder for heatmap UI
-    data = pd.DataFrame({
-        'Flavors': ['Strawberry', 'Vanilla', 'Custard'],
-        'Synergy': [0.9, 0.8, 0.85]
-    })
-    chart = alt.Chart(data).mark_bar().encode(
-        x='Flavors',
-        y='Synergy',
-        color=alt.value("#ffa500")
-    )
-    st.altair_chart(chart, use_container_width=True)
+elif menu == "Recipe Diff Tool":
+    st.subheader("Recipe Diff Tool")
+    st.info("Coming soon: compare any two eLiquid recipes side by side.")
 
-with tabs[3]:
-    st.header("Steep Timer Manager")
-    st.write("Track steep times and reminders.")
-    # Placeholder for steep timer tracking
+elif menu == "VapeSim AI":
+    st.subheader("VapeSim AI")
+    st.info("Coming soon: Predictive analysis of recipe performance, balance, and steep curve.")
 
-with tabs[4]:
-    st.header("VapeSim AI")
-    st.write("Predictive profile analysis and warnings.")
-    # Placeholder for AI insights
-
-with tabs[5]:
-    st.header("Recipe Diff Tool")
-    st.write("Compare and contrast recipe versions.")
-    # Placeholder for comparison tool
+elif menu == "Quick Mix Assistant":
+    st.subheader("Quick Mix Assistant")
+    st.info("Coming soon: Enter a flavor or profile and get instant recipe suggestions.")
